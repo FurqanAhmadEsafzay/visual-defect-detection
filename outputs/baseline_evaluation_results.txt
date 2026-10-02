@@ -1,0 +1,88 @@
+Checkpoint: D:\Assessment\visual-defect-detection\models\best_model.pth
+Device: cpu
+Test samples: 45
+Class mapping: {'defective': 0, 'normal': 1}
+Accuracy: 0.777778
+Macro Precision: 0.388889
+Macro Recall: 0.500000
+Macro F1: 0.437500
+
+Per-class metrics:
+  defective: precision=0.000000, recall=0.000000, f1=0.000000
+  normal: precision=0.777778, recall=1.000000, f1=0.875000
+
+Confusion matrix (rows=actual, columns=predicted):
+                 Predicted
+                 Defective   Normal
+Actual Defective          0       10
+Actual Normal             0       35
+
+Defective as positive class:
+  TP: 0
+  FP: 0
+  FN: 10
+  TN: 35
+  False Positive: Normal product predicted as Defective.
+  False Negative: Defective product predicted as Normal.
+
+FALSE POSITIVES
+None
+
+FALSE NEGATIVES
+defective/broken_large_008.png | actual=defective | predicted=normal | confidence=0.889633
+defective/broken_large_013.png | actual=defective | predicted=normal | confidence=0.932770
+defective/broken_large_015.png | actual=defective | predicted=normal | confidence=0.931881
+defective/broken_small_010.png | actual=defective | predicted=normal | confidence=0.934188
+defective/broken_small_014.png | actual=defective | predicted=normal | confidence=0.930867
+defective/broken_small_016.png | actual=defective | predicted=normal | confidence=0.924905
+defective/contamination_004.png | actual=defective | predicted=normal | confidence=0.937635
+defective/contamination_008.png | actual=defective | predicted=normal | confidence=0.936085
+defective/contamination_014.png | actual=defective | predicted=normal | confidence=0.928422
+defective/contamination_015.png | actual=defective | predicted=normal | confidence=0.934006
+
+PER-IMAGE PREDICTIONS
+defective/broken_large_008.png | actual=defective | predicted=normal | confidence=0.889633 | correct=False
+defective/broken_large_013.png | actual=defective | predicted=normal | confidence=0.932770 | correct=False
+defective/broken_large_015.png | actual=defective | predicted=normal | confidence=0.931881 | correct=False
+defective/broken_small_010.png | actual=defective | predicted=normal | confidence=0.934188 | correct=False
+defective/broken_small_014.png | actual=defective | predicted=normal | confidence=0.930867 | correct=False
+defective/broken_small_016.png | actual=defective | predicted=normal | confidence=0.924905 | correct=False
+defective/contamination_004.png | actual=defective | predicted=normal | confidence=0.937635 | correct=False
+defective/contamination_008.png | actual=defective | predicted=normal | confidence=0.936085 | correct=False
+defective/contamination_014.png | actual=defective | predicted=normal | confidence=0.928422 | correct=False
+defective/contamination_015.png | actual=defective | predicted=normal | confidence=0.934006 | correct=False
+normal/test_good_007.png | actual=normal | predicted=normal | confidence=0.946775 | correct=True
+normal/test_good_016.png | actual=normal | predicted=normal | confidence=0.935607 | correct=True
+normal/test_good_017.png | actual=normal | predicted=normal | confidence=0.943214 | correct=True
+normal/train_good_006.png | actual=normal | predicted=normal | confidence=0.933474 | correct=True
+normal/train_good_007.png | actual=normal | predicted=normal | confidence=0.942311 | correct=True
+normal/train_good_008.png | actual=normal | predicted=normal | confidence=0.940262 | correct=True
+normal/train_good_022.png | actual=normal | predicted=normal | confidence=0.934734 | correct=True
+normal/train_good_023.png | actual=normal | predicted=normal | confidence=0.931830 | correct=True
+normal/train_good_026.png | actual=normal | predicted=normal | confidence=0.942572 | correct=True
+normal/train_good_028.png | actual=normal | predicted=normal | confidence=0.928466 | correct=True
+normal/train_good_035.png | actual=normal | predicted=normal | confidence=0.936245 | correct=True
+normal/train_good_050.png | actual=normal | predicted=normal | confidence=0.933446 | correct=True
+normal/train_good_055.png | actual=normal | predicted=normal | confidence=0.948151 | correct=True
+normal/train_good_056.png | actual=normal | predicted=normal | confidence=0.935551 | correct=True
+normal/train_good_057.png | actual=normal | predicted=normal | confidence=0.934249 | correct=True
+normal/train_good_059.png | actual=normal | predicted=normal | confidence=0.928328 | correct=True
+normal/train_good_062.png | actual=normal | predicted=normal | confidence=0.936585 | correct=True
+normal/train_good_070.png | actual=normal | predicted=normal | confidence=0.946492 | correct=True
+normal/train_good_071.png | actual=normal | predicted=normal | confidence=0.940341 | correct=True
+normal/train_good_107.png | actual=normal | predicted=normal | confidence=0.934484 | correct=True
+normal/train_good_108.png | actual=normal | predicted=normal | confidence=0.941148 | correct=True
+normal/train_good_114.png | actual=normal | predicted=normal | confidence=0.933753 | correct=True
+normal/train_good_129.png | actual=normal | predicted=normal | confidence=0.916813 | correct=True
+normal/train_good_139.png | actual=normal | predicted=normal | confidence=0.943433 | correct=True
+normal/train_good_143.png | actual=normal | predicted=normal | confidence=0.930869 | correct=True
+normal/train_good_150.png | actual=normal | predicted=normal | confidence=0.949452 | correct=True
+normal/train_good_151.png | actual=normal | predicted=normal | confidence=0.954380 | correct=True
+normal/train_good_154.png | actual=normal | predicted=normal | confidence=0.951548 | correct=True
+normal/train_good_163.png | actual=normal | predicted=normal | confidence=0.933024 | correct=True
+normal/train_good_166.png | actual=normal | predicted=normal | confidence=0.952879 | correct=True
+normal/train_good_173.png | actual=normal | predicted=normal | confidence=0.944172 | correct=True
+normal/train_good_179.png | actual=normal | predicted=normal | confidence=0.922809 | correct=True
+normal/train_good_183.png | actual=normal | predicted=normal | confidence=0.944234 | correct=True
+normal/train_good_188.png | actual=normal | predicted=normal | confidence=0.936965 | correct=True
+normal/train_good_189.png | actual=normal | predicted=normal | confidence=0.924759 | correct=True

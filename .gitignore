@@ -1,0 +1,24 @@
+# Python environments and cache files
+venv/
+__pycache__/
+*.pyc
+.env
+
+# IDE files
+.idea/
+.vscode/
+*.code-workspace
+
+# Local datasets
+data/raw/
+data/processed/
+
+# Model artifacts (keep the selected submission checkpoint)
+*.pth
+!models/best_model_finetuned.pth
+*.pt
+
+# Generated outputs (keep the documented evaluation reports)
+outputs/*
+!outputs/baseline_evaluation_results.txt
+!outputs/final_evaluation_results.txt

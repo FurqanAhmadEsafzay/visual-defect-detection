@@ -1,0 +1,15 @@
+venv/
+data/
+outputs/
+.git/
+.gitignore
+__pycache__/
+**/__pycache__/
+*.pyc
+**/*.pyc
+*.pyo
+**/*.pyo
+.env
+.vscode/
+.idea/
+models/best_model.pth
