@@ -1,0 +1,224 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1600" viewBox="0 0 2560 1600" role="img" aria-labelledby="title description">
+  <title id="title">Visual Defect Detection System Architecture</title>
+  <desc id="description">Architecture diagram showing the data pipeline, model training and evaluation, FastAPI inference, and CPU Docker deployment configuration.</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-teal" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#0f766e"/>
+    </marker>
+    <marker id="arrow-amber" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#b45309"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .canvas { fill: #f8fafc; }
+      .title { font: 700 48px "Segoe UI", Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 23px "Segoe UI", Arial, sans-serif; fill: #475569; }
+      .panel { stroke-width: 2; rx: 8; filter: url(#shadow); }
+      .panel-title { font: 700 29px "Segoe UI", Arial, sans-serif; letter-spacing: 0; }
+      .panel-note { font: 400 19px "Segoe UI", Arial, sans-serif; fill: #64748b; }
+      .node { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 8; }
+      .node-title { font: 700 23px "Segoe UI", Arial, sans-serif; fill: #0f172a; text-anchor: middle; }
+      .node-text { font: 400 19px "Segoe UI", Arial, sans-serif; fill: #475569; text-anchor: middle; }
+      .small { font: 400 17px "Segoe UI", Arial, sans-serif; fill: #64748b; text-anchor: middle; }
+      .label { font: 600 18px "Segoe UI", Arial, sans-serif; fill: #475569; text-anchor: middle; }
+      .arrow { fill: none; stroke: #475569; stroke-width: 3; marker-end: url(#arrow); }
+      .arrow-teal { fill: none; stroke: #0f766e; stroke-width: 3; marker-end: url(#arrow-teal); }
+      .arrow-amber { fill: none; stroke: #b45309; stroke-width: 3; marker-end: url(#arrow-amber); }
+      .arrow-blue { fill: none; stroke: #2563eb; stroke-width: 3; marker-end: url(#arrow-blue); }
+      .dashed { stroke-dasharray: 10 8; }
+      .pill { rx: 18; }
+      .pill-text { font: 600 17px "Segoe UI", Arial, sans-serif; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect class="canvas" width="2560" height="1600"/>
+  <text class="title" x="60" y="70">Visual Defect Detection System</text>
+  <text class="subtitle" x="60" y="108">Implemented data, training, evaluation, CPU inference, and deployment packaging flows</text>
+  <rect x="2140" y="48" width="350" height="50" class="pill" fill="#e2e8f0"/>
+  <text x="2315" y="80" class="pill-text" fill="#334155">Normal / Defective Classification</text>
+
+  <!-- Data pipeline -->
+  <rect x="40" y="135" width="1220" height="690" class="panel" fill="#f0fdfa" stroke="#99f6e4"/>
+  <rect x="40" y="135" width="1220" height="64" fill="#ccfbf1" rx="8"/>
+  <rect x="40" y="191" width="1220" height="8" fill="#ccfbf1"/>
+  <text x="75" y="178" class="panel-title" fill="#115e59">1. Data Pipeline</text>
+
+  <rect x="90" y="225" width="480" height="92" class="node"/>
+  <text x="330" y="260" class="node-title">Raw Product Images</text>
+  <text x="330" y="289" class="node-text">MVTec AD bottle  |  data/raw/bottle</text>
+
+  <rect x="90" y="355" width="480" height="92" class="node"/>
+  <text x="330" y="390" class="node-title">Dataset Inspection</text>
+  <text x="330" y="419" class="node-text">src/inspect_dataset.py  |  read-only checks</text>
+
+  <rect x="90" y="485" width="480" height="92" class="node"/>
+  <text x="330" y="520" class="node-title">Dataset Preparation</text>
+  <text x="330" y="549" class="node-text">src/prepare_dataset.py  |  seed 42</text>
+
+  <rect x="90" y="615" width="480" height="120" class="node"/>
+  <text x="330" y="650" class="node-title">Stratified Binary Split</text>
+  <text x="330" y="681" class="node-text">Train 70%  |  Validation 15%  |  Test 15%</text>
+  <text x="330" y="711" class="small">Normal / Defective  |  ground-truth masks excluded</text>
+
+  <rect x="680" y="225" width="500" height="92" class="node"/>
+  <text x="930" y="260" class="node-title">PyTorch Dataset + DataLoader</text>
+  <text x="930" y="289" class="node-text">src/dataset.py  |  ImageFolder</text>
+
+  <rect x="680" y="385" width="500" height="126" class="node"/>
+  <text x="930" y="420" class="node-title">Training Preprocessing</text>
+  <text x="930" y="451" class="node-text">Resize 224x224  |  RandomHorizontalFlip</text>
+  <text x="930" y="481" class="node-text">RandomRotation(10)  |  ImageNet normalization</text>
+
+  <rect x="680" y="575" width="500" height="112" class="node"/>
+  <text x="930" y="610" class="node-title">Validation / Test Preprocessing</text>
+  <text x="930" y="641" class="node-text">Resize 224x224  |  ImageNet normalization</text>
+  <text x="930" y="668" class="small">Deterministic; no random augmentation</text>
+
+  <path d="M330 317 V355" class="arrow-teal"/>
+  <path d="M330 447 V485" class="arrow-teal"/>
+  <path d="M330 577 V615" class="arrow-teal"/>
+  <path d="M570 675 H625 V271 H680" class="arrow-teal"/>
+  <path d="M880 317 V385" class="arrow-teal"/>
+  <path d="M980 317 V545 H930 V575" class="arrow-teal"/>
+  <text x="850" y="354" class="label">train</text>
+  <text x="1060" y="547" class="label">validation / test</text>
+
+  <!-- Training and evaluation -->
+  <rect x="1300" y="135" width="1220" height="690" class="panel" fill="#fffbeb" stroke="#fde68a"/>
+  <rect x="1300" y="135" width="1220" height="64" fill="#fef3c7" rx="8"/>
+  <rect x="1300" y="191" width="1220" height="8" fill="#fef3c7"/>
+  <text x="1335" y="178" class="panel-title" fill="#92400e">2. Training &amp; Evaluation</text>
+
+  <rect x="1350" y="225" width="500" height="104" class="node"/>
+  <text x="1600" y="260" class="node-title">MobileNetV3 Small</text>
+  <text x="1600" y="291" class="node-text">ImageNet pretrained weights  |  CPU</text>
+
+  <rect x="1350" y="375" width="500" height="104" class="node"/>
+  <text x="1600" y="410" class="node-title">Weighted Cross-Entropy Loss</text>
+  <text x="1600" y="441" class="node-text">Inverse-frequency class weights</text>
+
+  <rect x="1350" y="525" width="500" height="120" class="node"/>
+  <text x="1600" y="560" class="node-title">Controlled Fine-Tuning</text>
+  <text x="1600" y="591" class="node-text">Final feature block: features[12]</text>
+  <text x="1600" y="619" class="small">Classifier + final block trainable; earlier blocks frozen</text>
+
+  <rect x="1960" y="225" width="500" height="104" class="node"/>
+  <text x="2210" y="260" class="node-title">Validation-Based Selection</text>
+  <text x="2210" y="291" class="node-text">Defective F1  |  validation-loss tie-breaker</text>
+
+  <rect x="1960" y="375" width="500" height="104" class="node"/>
+  <text x="2210" y="410" class="node-title">Best Model Checkpoint</text>
+  <text x="2210" y="441" class="node-text">models/best_model_finetuned.pth</text>
+
+  <rect x="1960" y="525" width="500" height="104" class="node"/>
+  <text x="2210" y="560" class="node-title">Final Test Evaluation</text>
+  <text x="2210" y="591" class="node-text">src/evaluate.py  |  untouched test split</text>
+
+  <rect x="1960" y="675" width="500" height="110" class="node"/>
+  <text x="2210" y="710" class="node-title">Evaluation Outputs</text>
+  <text x="2210" y="741" class="node-text">Precision  |  Recall  |  F1  |  Confusion Matrix</text>
+  <text x="2210" y="769" class="small">False-positive / false-negative error analysis</text>
+
+  <path d="M1180 448 H1260 V277 H1350" class="arrow-amber"/>
+  <text x="1260" y="253" class="label">training batches</text>
+  <path d="M1600 329 V375" class="arrow-amber"/>
+  <path d="M1600 479 V525" class="arrow-amber"/>
+  <path d="M1850 585 H1905 V277 H1960" class="arrow-amber"/>
+  <path d="M2210 329 V375" class="arrow-amber"/>
+  <path d="M2210 479 V525" class="arrow-amber"/>
+  <path d="M2210 629 V675" class="arrow-amber"/>
+
+  <!-- Inference API -->
+  <rect x="40" y="855" width="1220" height="705" class="panel" fill="#eff6ff" stroke="#bfdbfe"/>
+  <rect x="40" y="855" width="1220" height="64" fill="#dbeafe" rx="8"/>
+  <rect x="40" y="911" width="1220" height="8" fill="#dbeafe"/>
+  <text x="75" y="898" class="panel-title" fill="#1d4ed8">3. Inference API</text>
+
+  <rect x="85" y="955" width="230" height="100" class="node"/>
+  <text x="200" y="993" class="node-title">Client / User</text>
+  <text x="200" y="1024" class="node-text">Uploaded image</text>
+
+  <rect x="365" y="955" width="280" height="100" class="node"/>
+  <text x="505" y="993" class="node-title">FastAPI Service</text>
+  <text x="505" y="1024" class="node-text">api/main.py  |  POST /predict</text>
+
+  <rect x="695" y="955" width="260" height="100" class="node"/>
+  <text x="825" y="985" class="node-title">Input Validation</text>
+  <text x="825" y="1016" class="node-text">JPEG / PNG / BMP</text>
+  <text x="825" y="1043" class="small">Content type + empty-file checks</text>
+
+  <rect x="1005" y="955" width="205" height="100" class="node"/>
+  <text x="1108" y="993" class="node-title">Pillow</text>
+  <text x="1108" y="1024" class="node-text">Decode + RGB</text>
+
+  <rect x="900" y="1125" width="310" height="120" class="node"/>
+  <text x="1055" y="1160" class="node-title">Deterministic Preprocessing</text>
+  <text x="1055" y="1191" class="node-text">src/inference.py  |  Resize 224x224</text>
+  <text x="1055" y="1219" class="small">ToTensor + ImageNet normalization</text>
+
+  <rect x="565" y="1125" width="285" height="120" class="node"/>
+  <text x="708" y="1160" class="node-title">MobileNetV3 Small</text>
+  <text x="708" y="1191" class="node-text">Fine-tuned checkpoint</text>
+  <text x="708" y="1219" class="small">CPU inference  |  raw logits</text>
+
+  <rect x="310" y="1125" width="205" height="120" class="node"/>
+  <text x="413" y="1174" class="node-title">Softmax</text>
+  <text x="413" y="1205" class="node-text">Probabilities</text>
+
+  <rect x="85" y="1125" width="175" height="120" class="node"/>
+  <text x="173" y="1160" class="node-title">JSON Response</text>
+  <text x="173" y="1191" class="small">predicted_class</text>
+  <text x="173" y="1219" class="small">confidence</text>
+
+  <rect x="365" y="1340" width="330" height="110" class="node"/>
+  <text x="530" y="1377" class="node-title">GET /health</text>
+  <text x="530" y="1408" class="node-text">Service + model-loaded status</text>
+
+  <path d="M315 1005 H365" class="arrow-blue"/>
+  <path d="M645 1005 H695" class="arrow-blue"/>
+  <path d="M955 1005 H1005" class="arrow-blue"/>
+  <path d="M1108 1055 V1090 H1055 V1125" class="arrow-blue"/>
+  <path d="M900 1185 H850" class="arrow-blue"/>
+  <path d="M565 1185 H515" class="arrow-blue"/>
+  <path d="M310 1185 H260" class="arrow-blue"/>
+  <path d="M505 1055 V1310 H530 V1340" class="arrow-blue dashed"/>
+  <path d="M2460 427 H2490 V840 H1230 V1275 H708 V1245" class="arrow dashed"/>
+  <text x="1840" y="832" class="label">selected checkpoint loaded once at service startup</text>
+
+  <!-- Deployment packaging -->
+  <rect x="1300" y="855" width="1220" height="705" class="panel" fill="#f8fafc" stroke="#cbd5e1"/>
+  <rect x="1300" y="855" width="1220" height="64" fill="#e2e8f0" rx="8"/>
+  <rect x="1300" y="911" width="1220" height="8" fill="#e2e8f0"/>
+  <text x="1335" y="898" class="panel-title" fill="#334155">4. Deployment Packaging</text>
+  <rect x="2130" y="867" width="340" height="38" class="pill" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="2300" y="892" class="pill-text" fill="#475569">Configuration statically reviewed</text>
+  <text x="1910" y="955" class="panel-note" text-anchor="middle">CPU Docker deployment configuration; container runtime not tested locally</text>
+
+  <rect x="1580" y="990" width="660" height="100" class="node"/>
+  <text x="1910" y="1028" class="node-title">Dockerfile</text>
+  <text x="1910" y="1059" class="node-text">python:3.13-slim  |  CPU PyTorch packages</text>
+
+  <rect x="1580" y="1140" width="660" height="100" class="node"/>
+  <text x="1910" y="1178" class="node-title">CPU-Only Docker Image</text>
+  <text x="1910" y="1209" class="node-text">API + source + fine-tuned checkpoint</text>
+
+  <rect x="1580" y="1290" width="660" height="100" class="node"/>
+  <text x="1910" y="1328" class="node-title">Uvicorn</text>
+  <text x="1910" y="1359" class="node-text">api.main:app  |  host 0.0.0.0</text>
+
+  <rect x="1580" y="1440" width="660" height="90" class="node"/>
+  <text x="1910" y="1475" class="node-title">FastAPI Service</text>
+  <text x="1910" y="1506" class="node-text">Port 8000</text>
+
+  <path d="M1910 1090 V1140" class="arrow"/>
+  <path d="M1910 1240 V1290" class="arrow"/>
+  <path d="M1910 1390 V1440" class="arrow"/>
+</svg>

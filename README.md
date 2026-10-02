@@ -250,6 +250,12 @@ The FastAPI application itself was tested successfully in the local Python envir
 
 The system separates offline dataset and model development from CPU-only runtime inference. The test split is used only for final evaluation, not for training or checkpoint selection.
 
+### Architecture Diagram
+
+A standalone architecture diagram is available at `docs/architecture.png`. The editable SVG source is included at `docs/architecture.svg`.
+
+![Visual Defect Detection System Architecture](docs/architecture.png)
+
 ```mermaid
 flowchart LR
     subgraph DATA["Data development flow"]
