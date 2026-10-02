@@ -8,7 +8,15 @@ It demonstrates the complete workflow from dataset inspection and reproducible p
 
 ## Dataset Strategy
 
-The assessment stated that a small Normal/Defective dataset would be provided, but that dataset was not available during implementation. The public MVTec AD `bottle` category was therefore used as a temporary substitute to demonstrate the complete pipeline. MVTec was not supplied as part of the assessment.
+### Dataset Availability Note
+
+The technical assessment indicated that a small dataset containing Normal and Defective product images would be provided. However, the intended assessment dataset was not available during the implementation period.
+
+I contacted the company through the support option available on the assessment portal to request clarification or access to the dataset, but I did not receive a response within the assessment timeframe.
+
+To avoid blocking the implementation, I selected the publicly available MVTec AD `bottle` dataset as a temporary substitute. MVTec was not supplied by the company. The `bottle` category represents an industrial visual inspection scenario and contains normal product images together with multiple defect categories, making it suitable for demonstrating the requested Normal/Defective classification pipeline.
+
+The MVTec dataset was adapted into a supervised binary classification task. Ground-truth segmentation masks were not used as classification inputs. The pipeline is structured so that this temporary dataset can be replaced with the intended assessment or client dataset when it becomes available.
 
 ### Temporary Development Dataset: MVTec AD
 
@@ -16,8 +24,6 @@ MVTec AD is an industrial anomaly and defect detection dataset. This implementat
 
 - `good` -> `Normal`
 - `broken_large`, `broken_small`, and `contamination` -> `Defective`
-
-The pixel-level masks under `ground_truth/` are not used as classification inputs. The data-loading and preparation workflow can be adapted to the intended assessment or client dataset when it becomes available.
 
 The original `bottle` directory should be placed at `data/raw/bottle/` without reorganizing or relabeling its contents:
 
@@ -223,7 +229,13 @@ After startup:
 - Health endpoint: `http://localhost:8000/health`
 - Interactive FastAPI documentation: `http://localhost:8000/docs`
 
-Local FastAPI verification completed successfully on the development machine. The Docker configuration was statically reviewed, but Docker runtime verification was not performed because Docker was unavailable in the current environment.
+### Docker Verification Note
+
+The Docker configuration and deployment instructions were prepared and statically reviewed, but the container was not built or runtime-tested on the development machine.
+
+Docker Desktop had previously encountered issues on this system, and the machine currently has limited available storage. Reinstalling Docker Desktop during the assessment timeframe could therefore not be completed reliably.
+
+The FastAPI application itself was tested successfully in the local Python environment. Verification included model loading, the health endpoint, valid image predictions, invalid image handling, and unsupported file-type handling. The provided Dockerfile is intended to package that same verified CPU inference service in a reproducible container environment.
 
 ## Reproducibility
 
@@ -334,4 +346,3 @@ flowchart LR
 - [x] Local setup, training, evaluation, and API instructions
 - [x] Known limitations and dataset disclosure
 - [ ] Docker runtime verification (Docker unavailable locally)
-- [ ] Demo video (not created yet)
